@@ -88,5 +88,42 @@ def addSong():
     db.session.commit()
     return song_schema.jsonify(songs)
 
+@app.route("/update/<id>", methods = ["PUT"])
+def updateSong(id):
+    song = Songs.query.get(id)
+
+    artist = request.json["artist"]
+    title = request.json["title"]
+    album = request.json["album"]
+    year = request.json["year"]
+    format = request.json["format"]
+    genre = request.json["genre"]
+    sound_engineer = request.json["sound_engineer"]
+    peak = request.json["peak"]
+    true_peak = request.json["true_peak"]
+    rms_max = request.json["rms_max"]
+    rms_av = request.json["rms_av"]
+    lufs_max = request.json["lufs_max"]
+    lufs_av = request.json["lufs_av"]
+
+    song.artist = artist
+    song.title = title
+    song.album = album
+    song.year = year
+    song.format = format
+    song.genre = genre
+    song.sound_engineer = sound_engineer
+    song.peak = peak
+    song.true_peak = true_peak
+    song.rms_max = rms_max
+    song.rms_av = rms_av
+    song.lufs_max = lufs_max
+    song.lufs_av = lufs_av
+
+    db.session.commit()
+    return song_schema.jsonify(song)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
