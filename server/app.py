@@ -21,9 +21,9 @@ class Songs(db.Model):
     title = db.Column(db.String(100))
     album = db.Column(db.String(100))
     year = db.Column(db.Integer)
-    format = db.Column(db.String)
-    genre = db.Column(db.String)
-    sound_engineer = db.Column(db.String)
+    format = db.Column(db.String(20))
+    genre = db.Column(db.String(50))
+    sound_engineer = db.Column(db.String(30))
     peak = db.Column(db.Float)
     true_peak = db.Column(db.Float)
     rms_max = db.Column(db.Float)
@@ -55,6 +55,10 @@ song_schema = SongSchema()
 songs_schema = SongSchema(many=True)
 
 #---------------------ROUTES-----------------------
+
+@app.route("/", methods = ["GET"])
+def getdata():
+    return "Hello world"
 
 if __name__ == "__main__":
     app.run(debug=True)
