@@ -58,7 +58,35 @@ songs_schema = SongSchema(many=True)
 
 @app.route("/", methods = ["GET"])
 def getdata():
-    return "Hello world"
+    allSongs = Songs.query.all()
+    results = songs_schema.dump(allSongs)
+    return jsonify(results)
+
+@app.route("/<id>", methods = ["GET"])
+def getSongById(id):
+    song = Songs.query.get(id)
+    return song_schema.jsonify(song)
+
+@app.route("/add", methods = ["POST"])
+def addSong():
+    artist = request.json["artist"]
+    title = request.json["title"]
+    album = request.json["album"]
+    year = request.json["year"]
+    format = request.json["format"]
+    genre = request.json["genre"]
+    sound_engineer = request.json["sound_engineer"]
+    peak = request.json["peak"]
+    true_peak = request.json["true_peak"]
+    rms_max = request.json["rms_max"]
+    rms_av = request.json["rms_av"]
+    lufs_max = request.json["lufs_max"]
+    lufs_av = request.json["lufs_av"]
+
+    songs = Songs(artist, title, album, year, format, genre, sound_engineer, peak, true_peak, rms_max, rms_av, lufs_max, lufs_av)
+    db.session.add(songs)
+    db.session.commit()
+    return song_schema.jsonify(songs)
 
 if __name__ == "__main__":
     app.run(debug=True)
