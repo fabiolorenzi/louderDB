@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import UpdateForm from "./UpdateForm.jsx";
+
 function Home() {
 
     //------------------STATES--------------------
@@ -22,6 +24,7 @@ function Home() {
         lufs_av: 0
     });
     const [update, setUpdate] = useState(false);
+    const [id, setId] = useState("");
 
 
     //------------------INITIAL_EFFECTS--------------------
@@ -62,8 +65,9 @@ function Home() {
         window.location.reload();
     };
 
-    const updater = e => {
+    const updater = (e, id) => {
         e.preventDefault();
+        setId(id);
         setUpdate(!update);
     };
 
@@ -110,6 +114,9 @@ function Home() {
                 <input type="number" step="0.1"  name="lufs_av" value={song.lufs_av} placeholder="LUFS Av" onChange={handleChange} />
                 <button type="submit">Add</button>
             </form>
+            <div className="hiddenForm">
+                {update ? <UpdateForm id={id}/> : ""}
+            </div>
             <h1>Songs Data</h1>
             <table className="table">
                 <thead>
@@ -146,7 +153,7 @@ function Home() {
                             <td>{song.lufs_max} LUFS</td>
                             <td>{song.lufs_av} LUFS</td>
                             <td>
-                                <button onClick={updater}>Update</button>
+                                <button onClick={e => updater(e, song.id)}>Update</button>
                                 <button onClick={e => remover(e, song.id)}>Delete</button>
                             </td>
                         </tr>
