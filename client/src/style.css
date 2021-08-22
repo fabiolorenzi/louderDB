@@ -31,3 +31,7 @@ th, td {
 th {
     background-color: #2ee400;
 }
+
+.hiddenForm {
+    margin-top: 50px;
+}
