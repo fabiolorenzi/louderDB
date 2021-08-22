@@ -123,6 +123,14 @@ def updateSong(id):
     db.session.commit()
     return song_schema.jsonify(song)
 
+@app.route("/delete/<id>", methods = ["DELETE"])
+def deletesong(id):
+    song = Songs.query.get(id)
+    db.session.delete(song)
+    db.session.commit()
+
+    return song_schema.jsonify(song)
+
 
 
 if __name__ == "__main__":
