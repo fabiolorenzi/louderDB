@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.homeContainer {
+    display: block;
+    width: 100%;
+}
+
+.homeContainer h1 {
+    text-align: center;
+}
+
+.table {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000000;
+    text-align: left;
+    width: 100px;
+}
+
+th {
+    background-color: #2ee400;
+}
